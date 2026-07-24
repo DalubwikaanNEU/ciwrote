@@ -1,7 +1,7 @@
-// ===========================================
+// ==========================================
 // CIWROTE
 // Firebase Configuration
-// ===========================================
+// ==========================================
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
@@ -9,10 +9,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/11.0.2/firebase
 
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// ===========================================
-// FIREBASE CONFIG
-// Replace these with YOUR Firebase credentials
-// ===========================================
+import { getStorage } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-storage.js";
+
+// ==========================================
+// YOUR FIREBASE CONFIG
+// Replace with YOUR OWN values
+// ==========================================
 
 const firebaseConfig = {
 
@@ -30,28 +32,28 @@ const firebaseConfig = {
 
 };
 
-// ===========================================
+// ==========================================
 // INITIALIZE
-// ===========================================
+// ==========================================
 
 const app = initializeApp(firebaseConfig);
-
-// ===========================================
-// SERVICES
-// ===========================================
 
 const db = getFirestore(app);
 
 const auth = getAuth(app);
 
-// ===========================================
+const storage = getStorage(app);
+
+// ==========================================
 // EXPORT
-// ===========================================
+// ==========================================
 
 export {
 
     db,
 
-    auth
+    auth,
+
+    storage
 
 };
