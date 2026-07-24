@@ -1,16 +1,15 @@
 /* ==========================================
    CIWROTE LOGIN
-   Vintage Theme
 ========================================== */
 
 :root{
 
-    --bg:#f7f2ea;
-    --paper:#fcfaf6;
-    --text:#2c2825;
-    --accent:#7d5c42;
-    --border:#d8cbbb;
-    --muted:#7b7068;
+    --bg:#f6f1e8;
+    --paper:#fffdf8;
+    --text:#2d2a26;
+    --accent:#7b5b42;
+    --border:#d9ccb9;
+    --muted:#7b7268;
 
 }
 
@@ -40,21 +39,13 @@ body{
 
 }
 
-/* ==========================================
-   CONTAINER
-========================================== */
-
-.login-container{
+.login-page{
 
     width:100%;
 
-    padding:25px;
+    padding:20px;
 
 }
-
-/* ==========================================
-   CARD
-========================================== */
 
 .login-card{
 
@@ -70,21 +61,17 @@ body{
 
     padding:45px;
 
-    text-align:center;
-
-    box-shadow:0 12px 35px rgba(0,0,0,.06);
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
 
 }
 
-/* ==========================================
-   TITLE
-========================================== */
-
 .login-card h1{
+
+    text-align:center;
 
     font-family:'Special Elite', cursive;
 
-    font-size:2.4rem;
+    font-size:2.5rem;
 
     margin-bottom:10px;
 
@@ -92,45 +79,53 @@ body{
 
 .subtitle{
 
-    font-family:'Cormorant Garamond', serif;
+    text-align:center;
 
     color:var(--accent);
 
-    font-size:1.2rem;
-
-    margin-bottom:10px;
+    margin-bottom:8px;
 
 }
 
-.description{
+.tagline{
+
+    text-align:center;
 
     color:var(--muted);
 
-    margin-bottom:35px;
+    font-style:italic;
 
-    letter-spacing:1px;
+    margin-bottom:35px;
 
 }
 
-/* ==========================================
-   INPUTS
-========================================== */
+.field{
 
-.login-card input{
+    margin-bottom:20px;
+
+}
+
+.field label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+}
+
+.field input{
 
     width:100%;
 
-    padding:15px 18px;
-
-    margin-bottom:18px;
+    padding:14px 16px;
 
     border:1px solid var(--border);
 
-    border-radius:5px;
+    border-radius:6px;
 
-    background:#fffefc;
-
-    color:var(--text);
+    background:#fff;
 
     font-size:1rem;
 
@@ -142,17 +137,13 @@ body{
 
 }
 
-.login-card input:focus{
+.field input:focus{
 
     border-color:var(--accent);
 
-    box-shadow:0 0 0 3px rgba(125,92,66,.12);
+    box-shadow:0 0 0 3px rgba(123,91,66,.12);
 
 }
-
-/* ==========================================
-   BUTTON
-========================================== */
 
 #loginBtn{
 
@@ -162,17 +153,17 @@ body{
 
     border:none;
 
-    border-radius:5px;
+    border-radius:6px;
 
     background:var(--accent);
 
-    color:white;
+    color:#fff;
+
+    cursor:pointer;
 
     font-size:1rem;
 
     font-family:'EB Garamond', serif;
-
-    cursor:pointer;
 
     transition:.3s;
 
@@ -192,25 +183,17 @@ body{
 
 }
 
-/* ==========================================
-   MESSAGE
-========================================== */
-
 #message{
 
     margin-top:18px;
 
-    min-height:24px;
+    text-align:center;
 
-    color:#a33d3d;
+    color:#b3261e;
 
-    font-size:.95rem;
+    min-height:22px;
 
 }
-
-/* ==========================================
-   MOBILE
-========================================== */
 
 @media(max-width:600px){
 
