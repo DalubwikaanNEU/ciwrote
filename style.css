@@ -315,3 +315,25 @@ footer small{
     }
 
 }
+
+.admin-link{
+
+    display:block;
+
+    margin-top:15px;
+
+    font-size:.8rem;
+
+    color:transparent;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.admin-link:hover{
+
+    color:var(--accent);
+
+}
