@@ -5,189 +5,89 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ciwrote | Piece</title>
 
-    <!-- Google Fonts -->
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500&family=Special+Elite&display=swap"
-          rel="stylesheet">
 
-    <link rel="stylesheet"
-          href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
 
-    <style>
 
-        .reader{
-
-            max-width:850px;
-
-            margin:80px auto;
-
-            padding:40px;
-
-            background:#fcfaf6;
-
-            border:1px solid #d8cbbb;
-
-            border-radius:8px;
-
-        }
-
-        .reader-date{
-
-            color:#7b7068;
-
-            margin-bottom:10px;
-
-            font-size:.95rem;
-
-        }
-
-        .reader-title{
-
-            font-family:'Cormorant Garamond', serif;
-
-            font-size:3rem;
-
-            margin-bottom:10px;
-
-        }
-
-        .reader-category{
-
-            color:#7d5c42;
-
-            margin-bottom:40px;
-
-            font-style:italic;
-
-        }
-
-        .reader-content{
-
-            white-space:pre-wrap;
-
-            line-height:2;
-
-            font-size:1.2rem;
-
-        }
-
-        .back{
-
-            display:inline-block;
-
-            margin-bottom:40px;
-
-            text-decoration:none;
-
-            color:#7d5c42;
-
-        }
-
-        .back:hover{
-
-            text-decoration:underline;
-
-        }
-
-        @media(max-width:768px){
-
-            .reader{
-
-                margin:30px 15px;
-
-                padding:25px;
-
-            }
-
-            .reader-title{
-
-                font-size:2.2rem;
-
-            }
-
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
+
 <body>
+
+
 
 <header class="navbar">
 
-    <div class="logo">
 
-        <a href="index.html">
+    <a href="index.html" class="logo">
 
-            ciwrote
-
-        </a>
-
-    </div>
-
-    <nav>
-
-        <a href="index.html">
-
-            Home
-
-        </a>
-
-    </nav>
-
-</header>
-
-<main class="reader">
-
-    <a href="index.html"
-       class="back">
-
-        ← Back to Home
+        ciwrote
 
     </a>
 
-    <p class="reader-date"
-       id="date">
 
-        Loading...
+</header>
 
-    </p>
 
-    <h1 class="reader-title"
-        id="title">
 
-        Loading...
 
-    </h1>
+<main class="single-piece">
 
-    <p class="reader-category"
-       id="category">
 
-    </p>
+    <article id="piece">
 
-    <div class="reader-content"
-         id="content">
 
-        Loading literary piece...
+        <div class="loading">
 
-    </div>
+            Loading piece...
+
+        </div>
+
+
+    </article>
+
 
 </main>
 
-<script type="module"
-        src="piece.js"></script>
+
+
+
+<footer>
+
+
+    <p>
+
+        © 2026 ciwrote
+
+    </p>
+
+
+    <small>
+
+        tik, salita, at tula.
+
+    </small>
+
+
+</footer>
+
+
+
+
+<script type="module" src="piece.js"></script>
+
+
 
 </body>
 
