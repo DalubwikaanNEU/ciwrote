@@ -1,6 +1,6 @@
 // ==========================================
 // CIWROTE
-// Homepage
+// Homepage Firebase Loader
 // ==========================================
 
 import { db } from "./firebase.js";
@@ -14,85 +14,130 @@ import {
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// ==========================================
-// ELEMENTS
-// ==========================================
-
-const pieces = document.getElementById("pieces");
 
 // ==========================================
-// LOAD PIECES
+// ELEMENT
+// ==========================================
+
+const piecesContainer = document.getElementById("pieces");
+
+
+// ==========================================
+// CHECK ELEMENT
+// ==========================================
+
+if (!piecesContainer) {
+
+    console.error(
+        "Cannot find #pieces element in index.html"
+    );
+
+}
+
+
+// ==========================================
+// LOAD ALL PIECES
 // ==========================================
 
 async function loadPieces() {
 
-    pieces.innerHTML = `
+
+    if (!piecesContainer) return;
+
+
+
+    piecesContainer.innerHTML = `
+
         <div class="loading">
-            Loading literary pieces...
+
+            Loading pieces...
+
         </div>
+
     `;
+
+
 
     try {
 
-        const q = query(
+
+        const piecesQuery = query(
+
             collection(db, "pieces"),
-            orderBy("createdAt", "desc")
+
+            orderBy(
+                "createdAt",
+                "desc"
+            )
+
         );
 
-        const snapshot = await getDocs(q);
 
-        pieces.innerHTML = "";
+
+        const snapshot = await getDocs(
+            piecesQuery
+        );
+
+
+
+        piecesContainer.innerHTML = "";
+
+
 
         if (snapshot.empty) {
 
-            pieces.innerHTML = `
+
+            piecesContainer.innerHTML = `
 
                 <article class="piece">
 
-                    <p class="date">
-
-                        Today
-
-                    </p>
 
                     <h2>
 
-                        Welcome to ciwrote.
+                        No pieces yet.
 
                     </h2>
 
+
                     <p class="preview">
 
-                        There are no published literary pieces yet.
-
-                        Come back soon.
+                        Your first literary work will appear here.
 
                     </p>
+
 
                 </article>
 
             `;
 
+
             return;
+
 
         }
 
-        snapshot.forEach((document) => {
 
-            const piece = document.data();
 
-            const article = document.createElement("article");
 
-            article.className = "piece";
+        snapshot.forEach((doc)=>{
 
-            article.onclick = () => {
 
-                window.location.href =
-                    `piece.html?id=${document.id}`;
+            const piece = doc.data();
 
-            };
+
+
+            const article =
+            document.createElement("article");
+
+
+
+            article.className =
+            "piece";
+
+
 
             article.innerHTML = `
+
 
                 <p class="date">
 
@@ -100,39 +145,70 @@ async function loadPieces() {
 
                 </p>
 
+
+
                 <h2>
 
                     ${piece.title || "Untitled"}
 
                 </h2>
 
+
+
                 <p class="preview">
 
-                    ${createPreview(piece.content)}
+                    ${getPreview(piece.content)}
 
                 </p>
 
+
+                <a
+                href="piece.html?id=${doc.id}"
+                class="read-more">
+
+                    Read →
+
+                </a>
+
+
             `;
 
-            pieces.appendChild(article);
+
+
+            piecesContainer.appendChild(article);
+
+
 
         });
 
+
+
     }
 
-    catch (error) {
 
-        console.error(error);
 
-        pieces.innerHTML = `
+    catch(error){
+
+
+        console.error(
+            "Firestore Error:",
+            error
+        );
+
+
+
+        piecesContainer.innerHTML = `
+
 
             <article class="piece">
 
+
                 <h2>
 
-                    Unable to load your writings.
+                    Something went wrong.
 
                 </h2>
+
 
                 <p class="preview">
 
@@ -140,31 +216,48 @@ async function loadPieces() {
 
                 </p>
 
+
             </article>
+
 
         `;
 
-    }
-
-}
-
-// ==========================================
-// PREVIEW
-// ==========================================
-
-function createPreview(text = "") {
-
-    const cleaned = text.trim();
-
-    if (cleaned.length <= 220) {
-
-        return cleaned;
 
     }
 
-    return cleaned.substring(0,220) + "...";
 
 }
+
+
+// ==========================================
+// CREATE PREVIEW
+// ==========================================
+
+function getPreview(text){
+
+
+    if(!text){
+
+        return "";
+
+    }
+
+
+
+    if(text.length <= 200){
+
+        return text;
+
+    }
+
+
+
+    return text.substring(0,200) + "...";
+
+
+}
+
+
 
 // ==========================================
 // START
