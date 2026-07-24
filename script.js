@@ -1,8 +1,7 @@
-// ===========================================
+// ==========================================
 // CIWROTE
-// Homepage Loader
-// Firebase Firestore
-// ===========================================
+// Homepage
+// ==========================================
 
 import { db } from "./firebase.js";
 
@@ -15,49 +14,58 @@ import {
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// ===========================================
-// ELEMENT
-// ===========================================
+// ==========================================
+// ELEMENTS
+// ==========================================
 
-const piecesContainer = document.getElementById("pieces");
+const pieces = document.getElementById("pieces");
 
-// ===========================================
+// ==========================================
 // LOAD PIECES
-// ===========================================
+// ==========================================
 
 async function loadPieces() {
 
-    piecesContainer.innerHTML = `
+    pieces.innerHTML = `
         <div class="loading">
-            Loading pieces...
+            Loading literary pieces...
         </div>
     `;
 
     try {
 
         const q = query(
-
             collection(db, "pieces"),
-
             orderBy("createdAt", "desc")
-
         );
 
         const snapshot = await getDocs(q);
 
-        piecesContainer.innerHTML = "";
+        pieces.innerHTML = "";
 
         if (snapshot.empty) {
 
-            piecesContainer.innerHTML = `
+            pieces.innerHTML = `
 
                 <article class="piece">
 
-                    <h2>No pieces yet.</h2>
+                    <p class="date">
+
+                        Today
+
+                    </p>
+
+                    <h2>
+
+                        Welcome to ciwrote.
+
+                    </h2>
 
                     <p class="preview">
 
-                        The first poem will arrive soon.
+                        There are no published literary pieces yet.
+
+                        Come back soon.
 
                     </p>
 
@@ -69,13 +77,20 @@ async function loadPieces() {
 
         }
 
-        snapshot.forEach(doc => {
+        snapshot.forEach((document) => {
 
-            const piece = doc.data();
+            const piece = document.data();
 
             const article = document.createElement("article");
 
             article.className = "piece";
+
+            article.onclick = () => {
+
+                window.location.href =
+                    `piece.html?id=${document.id}`;
+
+            };
 
             article.innerHTML = `
 
@@ -87,28 +102,19 @@ async function loadPieces() {
 
                 <h2>
 
-                    ${piece.title}
+                    ${piece.title || "Untitled"}
 
                 </h2>
 
                 <p class="preview">
 
-                    ${(piece.content || "").substring(0,180)}...
+                    ${createPreview(piece.content)}
 
                 </p>
 
-                <a
-                    href="piece.html?id=${doc.id}"
-                    class="read-more"
-                >
-
-                    Read →
-
-                </a>
-
             `;
 
-            piecesContainer.appendChild(article);
+            pieces.appendChild(article);
 
         });
 
@@ -118,15 +124,19 @@ async function loadPieces() {
 
         console.error(error);
 
-        piecesContainer.innerHTML = `
+        pieces.innerHTML = `
 
             <article class="piece">
 
-                <h2>Something went wrong.</h2>
+                <h2>
 
-                <p>
+                    Unable to load your writings.
 
-                    Unable to load literary pieces.
+                </h2>
+
+                <p class="preview">
+
+                    ${error.message}
 
                 </p>
 
@@ -138,8 +148,26 @@ async function loadPieces() {
 
 }
 
-// ===========================================
+// ==========================================
+// PREVIEW
+// ==========================================
+
+function createPreview(text = "") {
+
+    const cleaned = text.trim();
+
+    if (cleaned.length <= 220) {
+
+        return cleaned;
+
+    }
+
+    return cleaned.substring(0,220) + "...";
+
+}
+
+// ==========================================
 // START
-// ===========================================
+// ==========================================
 
 loadPieces();
