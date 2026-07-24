@@ -5,33 +5,25 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ciwrote | Admin Login</title>
+    <title>ciwrote | Login</title>
 
-    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500&family=Special+Elite&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="login.css">
+    <link rel="stylesheet" href="login.css">
 
 </head>
 
 <body>
 
-    <div class="login-container">
+    <main class="login-page">
 
-        <div class="login-card">
+        <section class="login-card">
 
             <h1>
 
@@ -45,36 +37,63 @@
 
             </p>
 
-            <p class="description">
+            <p class="tagline">
 
-                Private Writing Desk
+                malayang sumusulat.
 
             </p>
 
-            <input
-                type="email"
-                id="email"
-                placeholder="Email">
+            <form id="loginForm">
 
-            <input
-                type="password"
-                id="password"
-                placeholder="Password">
+                <div class="field">
 
-            <button id="loginBtn">
+                    <label for="email">
 
-                Sign In
+                        Email
 
-            </button>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        required
+                        autocomplete="email">
+
+                </div>
+
+                <div class="field">
+
+                    <label for="password">
+
+                        Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        required
+                        autocomplete="current-password">
+
+                </div>
+
+                <button
+                    id="loginBtn"
+                    type="submit">
+
+                    Pumasok
+
+                </button>
+
+            </form>
 
             <p id="message"></p>
 
-        </div>
+        </section>
 
-    </div>
+    </main>
 
-    <script type="module"
-            src="login.js"></script>
+    <script type="module" src="login.js"></script>
 
 </body>
 
