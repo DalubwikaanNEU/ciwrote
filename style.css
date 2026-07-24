@@ -1,132 +1,317 @@
-<!DOCTYPE html>
-<html lang="en">
+/* ==========================================
+   CIWROTE
+   tik, salita, at tula.
+========================================== */
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+:root{
 
-    <title>ciwrote | tik, salita, at tula.</title>
+    --bg:#f6f1e8;
+    --paper:#fffdf8;
+    --text:#2d2a26;
+    --accent:#7b5b42;
+    --border:#d9ccb9;
+    --muted:#7b7268;
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+}
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500&family=Special+Elite&display=swap" rel="stylesheet">
+*{
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 
-<body>
+}
 
-    <!-- Navigation -->
-    <header class="navbar">
+html{
 
-        <div class="logo">
-            <a href="index.html">ciwrote</a>
-        </div>
+    scroll-behavior:smooth;
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="#pieces">Pieces</a>
-            <a href="about.html">About</a>
-        </nav>
+}
 
-    </header>
+body{
 
-    <!-- Hero -->
-    <section class="hero">
+    background:var(--bg);
 
-        <p class="small-title">A quiet corner of the internet.</p>
+    color:var(--text);
 
-        <h1>ciwrote</h1>
+    font-family:'EB Garamond', serif;
 
-        <h2>tik, salita, at tula.</h2>
+    line-height:1.8;
 
-        <p class="intro">
-            Here live poems, unfinished thoughts,
-            letters, and words that chose to stay.
-        </p>
+}
 
-        <div class="scroll-indicator">
-            ↓ Scroll to read ↓
-        </div>
+/* ===========================
+   NAVBAR
+=========================== */
 
-    </section>
+.navbar{
 
-    <!-- Literary Pieces -->
-    <main id="pieces" class="pieces">
+    width:100%;
 
-        <!-- Sample Piece -->
+    padding:25px 10%;
 
-        <article class="piece">
+    display:flex;
 
-            <p class="date">
-                July 25, 2026
-            </p>
+    justify-content:center;
 
-            <h2>
-                Untitled
-            </h2>
+    align-items:center;
 
-            <p class="preview">
-                The rain never really left.
-                It only learned how to whisper
-                through windows we forgot to close...
-            </p>
+}
 
-            <a href="#" class="read-more">
-                Read →
-            </a>
+.logo{
 
-        </article>
+    text-decoration:none;
 
-        <article class="piece">
+    color:var(--text);
 
-            <p class="date">
-                July 20, 2026
-            </p>
+    font-family:'Special Elite', cursive;
 
-            <h2>
-                Midnight Letter
-            </h2>
+    font-size:1.5rem;
 
-            <p class="preview">
-                Some conversations are meant to be
-                folded like old paper,
-                carried quietly until they become memories.
-            </p>
+}
 
-            <a href="#" class="read-more">
-                Read →
-            </a>
+/* ===========================
+   HERO
+=========================== */
 
-        </article>
+.hero{
 
-        <!-- Firebase will automatically insert future pieces here -->
+    min-height:80vh;
 
-    </main>
+    display:flex;
 
-    <!-- Footer -->
-    <footer>
+    flex-direction:column;
 
-        <p class="footer-title">
-            ciwrote
-        </p>
+    justify-content:center;
 
-        <p>
-            tik, salita, at tula.
-        </p>
+    align-items:center;
 
-        <small>
-            © 2026 ciwrote. All rights reserved.
-        </small>
+    text-align:center;
 
-    </footer>
+    padding:40px 20px;
 
-    <!-- Firebase Script (future) -->
-    <script type="module" src="script.js"></script>
+}
 
-</body>
+.hero h1{
 
-</html>
+    font-family:'Special Elite', cursive;
+
+    font-size:4rem;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    font-size:1.4rem;
+
+    color:var(--accent);
+
+    margin-bottom:12px;
+
+}
+
+.tagline{
+
+    font-style:italic;
+
+    color:var(--muted);
+
+    margin-bottom:45px;
+
+}
+
+.scroll{
+
+    font-size:2rem;
+
+    animation:float 2s infinite;
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(10px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ===========================
+   PIECES
+=========================== */
+
+.pieces{
+
+    width:90%;
+
+    max-width:850px;
+
+    margin:auto;
+
+    padding-bottom:100px;
+
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.piece{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    padding:35px;
+
+    margin-bottom:35px;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.piece:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.date{
+
+    color:var(--muted);
+
+    font-size:.9rem;
+
+    margin-bottom:10px;
+
+}
+
+.piece h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2rem;
+
+    margin-bottom:15px;
+
+}
+
+.preview{
+
+    white-space:pre-line;
+
+    color:#444;
+
+}
+
+.read-more{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    text-decoration:none;
+
+    color:var(--accent);
+
+    font-weight:bold;
+
+}
+
+.read-more:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ===========================
+   LOADING
+=========================== */
+
+.loading{
+
+    text-align:center;
+
+    color:var(--muted);
+
+    padding:100px 20px;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+footer{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:var(--muted);
+
+    border-top:1px solid var(--border);
+
+}
+
+footer small{
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .hero h1{
+
+        font-size:2.8rem;
+
+    }
+
+    .subtitle{
+
+        font-size:1.2rem;
+
+    }
+
+    .piece{
+
+        padding:25px;
+
+    }
+
+    .piece h2{
+
+        font-size:1.7rem;
+
+    }
+
+}
