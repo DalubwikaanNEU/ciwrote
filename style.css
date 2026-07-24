@@ -14,6 +14,7 @@
 
 }
 
+
 *{
 
     margin:0;
@@ -22,11 +23,13 @@
 
 }
 
+
 html{
 
     scroll-behavior:smooth;
 
 }
+
 
 body{
 
@@ -40,9 +43,12 @@ body{
 
 }
 
+
+
 /* ===========================
    NAVBAR
 =========================== */
+
 
 .navbar{
 
@@ -58,6 +64,7 @@ body{
 
 }
 
+
 .logo{
 
     text-decoration:none;
@@ -70,9 +77,12 @@ body{
 
 }
 
+
+
 /* ===========================
    HERO
 =========================== */
+
 
 .hero{
 
@@ -92,6 +102,7 @@ body{
 
 }
 
+
 .hero h1{
 
     font-family:'Special Elite', cursive;
@@ -101,6 +112,7 @@ body{
     margin-bottom:10px;
 
 }
+
 
 .subtitle{
 
@@ -112,6 +124,7 @@ body{
 
 }
 
+
 .tagline{
 
     font-style:italic;
@@ -122,6 +135,7 @@ body{
 
 }
 
+
 .scroll{
 
     font-size:2rem;
@@ -129,6 +143,8 @@ body{
     animation:float 2s infinite;
 
 }
+
+
 
 @keyframes float{
 
@@ -138,11 +154,13 @@ body{
 
     }
 
+
     50%{
 
         transform:translateY(10px);
 
     }
+
 
     100%{
 
@@ -152,9 +170,12 @@ body{
 
 }
 
+
+
 /* ===========================
    PIECES
 =========================== */
+
 
 .pieces{
 
@@ -168,9 +189,12 @@ body{
 
 }
 
+
+
 /* ===========================
-   CARD
+   PIECE CARD
 =========================== */
+
 
 .piece{
 
@@ -190,6 +214,7 @@ body{
 
 }
 
+
 .piece:hover{
 
     transform:translateY(-3px);
@@ -197,6 +222,7 @@ body{
     box-shadow:0 10px 25px rgba(0,0,0,.08);
 
 }
+
 
 .date{
 
@@ -208,6 +234,7 @@ body{
 
 }
 
+
 .piece h2{
 
     font-family:'Cormorant Garamond', serif;
@@ -218,6 +245,7 @@ body{
 
 }
 
+
 .preview{
 
     white-space:pre-line;
@@ -225,6 +253,7 @@ body{
     color:#444;
 
 }
+
 
 .read-more{
 
@@ -240,15 +269,19 @@ body{
 
 }
 
+
 .read-more:hover{
 
     text-decoration:underline;
 
 }
 
+
+
 /* ===========================
    LOADING
 =========================== */
+
 
 .loading{
 
@@ -260,9 +293,12 @@ body{
 
 }
 
+
+
 /* ===========================
    FOOTER
 =========================== */
+
 
 footer{
 
@@ -276,6 +312,7 @@ footer{
 
 }
 
+
 footer small{
 
     display:block;
@@ -284,37 +321,12 @@ footer small{
 
 }
 
+
+
 /* ===========================
-   MOBILE
+   ADMIN ACCESS
 =========================== */
 
-@media(max-width:768px){
-
-    .hero h1{
-
-        font-size:2.8rem;
-
-    }
-
-    .subtitle{
-
-        font-size:1.2rem;
-
-    }
-
-    .piece{
-
-        padding:25px;
-
-    }
-
-    .piece h2{
-
-        font-size:1.7rem;
-
-    }
-
-}
 
 .admin-link{
 
@@ -322,25 +334,32 @@ footer small{
 
     margin-top:15px;
 
-    font-size:.8rem;
+    font-size:.85rem;
 
-    color:transparent;
+    color:var(--muted);
 
     text-decoration:none;
+
+    font-style:italic;
 
     transition:.3s;
 
 }
 
+
 .admin-link:hover{
 
     color:var(--accent);
 
+    text-decoration:underline;
+
 }
 
-/* ==========================================
+
+
+/* ===========================
    SINGLE PIECE PAGE
-========================================== */
+=========================== */
 
 
 .single-piece{
@@ -367,7 +386,6 @@ footer small{
 }
 
 
-
 .single-piece h1{
 
     font-family:'Cormorant Garamond', serif;
@@ -377,15 +395,6 @@ footer small{
     margin-bottom:15px;
 
 }
-
-
-
-.single-piece .date{
-
-    color:var(--muted);
-
-}
-
 
 
 .single-piece .category{
@@ -399,7 +408,6 @@ footer small{
 }
 
 
-
 .full-content{
 
     margin-top:40px;
@@ -409,6 +417,46 @@ footer small{
     font-size:1.25rem;
 
     line-height:2;
+
+}
+
+
+
+/* ===========================
+   MOBILE
+=========================== */
+
+
+@media(max-width:768px){
+
+
+    .hero h1{
+
+        font-size:2.8rem;
+
+    }
+
+
+    .subtitle{
+
+        font-size:1.2rem;
+
+    }
+
+
+    .piece{
+
+        padding:25px;
+
+    }
+
+
+    .piece h2{
+
+        font-size:1.7rem;
+
+    }
+
 
 }
 
