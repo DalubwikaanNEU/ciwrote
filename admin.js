@@ -1,8 +1,7 @@
-// ===========================================
-// CIWROTE ADMIN
-// PART 1
-// Firebase Setup + Authentication
-// ===========================================
+// ==========================================
+// CIWROTE
+// Admin Writing Desk
+// ==========================================
 
 import { db, auth } from "./firebase.js";
 
@@ -11,14 +10,16 @@ import {
     collection,
     addDoc,
     getDocs,
+    doc,
+    getDoc,
     updateDoc,
     deleteDoc,
-    doc,
     query,
     orderBy,
     serverTimestamp
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
 
 import {
 
@@ -27,9 +28,11 @@ import {
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// ===========================================
+
+
+// ==========================================
 // ELEMENTS
-// ===========================================
+// ==========================================
 
 const titleInput = document.getElementById("title");
 
@@ -37,101 +40,107 @@ const categoryInput = document.getElementById("category");
 
 const contentInput = document.getElementById("content");
 
-const publishBtn = document.getElementById("publishBtn");
+const saveBtn = document.getElementById("saveBtn");
 
 const pieceList = document.getElementById("pieceList");
 
-// ===========================================
+const status = document.getElementById("status");
+
+const logoutBtn = document.getElementById("logoutBtn");
+
+
+
+// ==========================================
 // VARIABLES
-// ===========================================
+// ==========================================
 
 let editingId = null;
 
-// ===========================================
+
+
+// ==========================================
 // AUTH CHECK
-// ===========================================
+// ==========================================
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user)=>{
 
-    if (!user) {
 
-        window.location.href = "login.html";
+    if(!user){
+
+        window.location.href="login.html";
 
         return;
 
     }
+
 
     loadPieces();
 
+
 });
 
-// ===========================================
-// UTILITIES
-// ===========================================
 
-function resetForm() {
 
-    titleInput.value = "";
+// ==========================================
+// LOGOUT
+// ==========================================
 
-    categoryInput.value = "";
+logoutBtn.addEventListener("click", async()=>{
 
-    contentInput.value = "";
 
-    editingId = null;
+    await signOut(auth);
 
-    publishBtn.textContent = "Publish";
 
-}
+    window.location.href="login.html";
 
-function formatDate() {
 
-    return new Date().toLocaleDateString("en-US", {
+});
 
-        year: "numeric",
 
-        month: "long",
 
-        day: "numeric"
+// ==========================================
+// SAVE PIECE
+// ==========================================
 
-    });
+saveBtn.addEventListener("click", async()=>{
 
-}
-// ===========================================
-// PART 2
-// PUBLISH / UPDATE PIECE
-// ===========================================
-
-publishBtn.addEventListener("click", async () => {
 
     const title = titleInput.value.trim();
 
-    const category = categoryInput.value.trim();
+    const category = categoryInput.value;
 
     const content = contentInput.value.trim();
 
-    if (!title || !content) {
 
-        alert("Please enter a title and your literary piece.");
+
+    if(!title || !content){
+
+
+        status.textContent =
+        "Please complete your piece.";
+
 
         return;
 
     }
 
-    publishBtn.disabled = true;
 
-    publishBtn.textContent = "Saving...";
 
-    try {
+    saveBtn.disabled=true;
 
-        // ==========================
-        // UPDATE
-        // ==========================
+    saveBtn.textContent="Saving...";
 
-        if (editingId) {
+
+
+    try{
+
+
+        if(editingId){
+
 
             await updateDoc(
 
-                doc(db, "pieces", editingId),
+                doc(db,"pieces",editingId),
 
                 {
 
@@ -141,29 +150,29 @@ publishBtn.addEventListener("click", async () => {
 
                     content,
 
-                    date: formatDate(),
-
-                    updatedAt: serverTimestamp()
+                    updatedAt:serverTimestamp()
 
                 }
 
             );
 
-            alert("Piece updated successfully.");
+
+            status.textContent =
+            "Piece updated.";
+
 
         }
 
-        // ==========================
-        // CREATE
-        // ==========================
 
-        else {
+        else{
+
 
             await addDoc(
 
-                collection(db, "pieces"),
+                collection(db,"pieces"),
 
                 {
+
 
                     title,
 
@@ -171,281 +180,347 @@ publishBtn.addEventListener("click", async () => {
 
                     content,
 
-                    date: formatDate(),
+                    date:new Date().toLocaleDateString(
+                        "en-US",
+                        {
+                            year:"numeric",
+                            month:"long",
+                            day:"numeric"
+                        }
+                    ),
 
-                    createdAt: serverTimestamp(),
 
-                    updatedAt: serverTimestamp()
+                    createdAt:serverTimestamp(),
+
+                    updatedAt:serverTimestamp()
+
 
                 }
 
             );
 
-            alert("Piece published successfully.");
+
+            status.textContent =
+            "Piece published.";
+
 
         }
 
-        resetForm();
+
+
+        clearForm();
 
         loadPieces();
 
+
+
     }
 
-    catch (error) {
+
+    catch(error){
+
 
         console.error(error);
 
-        alert("Failed to save piece.");
+
+        status.textContent =
+        "Something went wrong.";
+
 
     }
 
-    finally {
 
-        publishBtn.disabled = false;
 
-        publishBtn.textContent = "Publish";
+    finally{
+
+
+        saveBtn.disabled=false;
+
+        saveBtn.textContent="Publish";
+
 
     }
+
+
 
 });
-// ===========================================
-// PART 3
-// LOAD ALL PIECES
-// ===========================================
 
-async function loadPieces() {
 
-    pieceList.innerHTML = "Loading...";
 
-    try {
+// ==========================================
+// LOAD PIECES
+// ==========================================
 
-        const q = query(
+async function loadPieces(){
 
-            collection(db, "pieces"),
 
-            orderBy("createdAt", "desc")
+    pieceList.innerHTML="Loading...";
+
+
+
+    try{
+
+
+        const q=query(
+
+            collection(db,"pieces"),
+
+            orderBy("createdAt","desc")
 
         );
 
-        const snapshot = await getDocs(q);
 
-        pieceList.innerHTML = "";
 
-        if (snapshot.empty) {
+        const snapshot=await getDocs(q);
 
-            pieceList.innerHTML = `
 
-                <div class="piece-card">
 
-                    <h3>No literary pieces yet.</h3>
+        pieceList.innerHTML="";
 
-                    <p>Your published works will appear here.</p>
 
-                </div>
 
-            `;
+        if(snapshot.empty){
+
+
+            pieceList.innerHTML=
+
+            "<p>No pieces yet.</p>";
+
 
             return;
 
+
         }
 
-        snapshot.forEach((document) => {
 
-            const piece = document.data();
 
-            const card = document.createElement("div");
+        snapshot.forEach((document)=>{
 
-            card.className = "piece-card";
 
-            card.innerHTML = `
+            const piece=document.data();
 
-                <h3>${piece.title}</h3>
 
-                <p>${piece.date || ""}</p>
 
-                <p><strong>Category:</strong> ${piece.category || "Uncategorized"}</p>
+            pieceList.innerHTML += `
 
-                <div class="actions">
+                <article class="admin-piece">
 
-                    <button
+
+                    <h3>
+
+                        ${piece.title}
+
+                    </h3>
+
+
+                    <small>
+
+                        ${piece.category || ""}
+
+                    </small>
+
+
+                    <div class="actions">
+
+
+                        <button
                         class="edit-btn"
-                        data-id="${document.id}"
-                    >
+                        data-id="${document.id}">
 
-                        Edit
+                            Edit
 
-                    </button>
+                        </button>
 
-                    <button
+
+
+                        <button
                         class="delete-btn"
-                        data-id="${document.id}"
-                    >
+                        data-id="${document.id}">
 
-                        Delete
+                            Delete
 
-                    </button>
+                        </button>
 
-                </div>
+
+                    </div>
+
+
+                </article>
 
             `;
 
-            pieceList.appendChild(card);
 
         });
 
-        attachEditEvents();
 
-        attachDeleteEvents();
+
+        attachButtons();
+
+
 
     }
 
-    catch (error) {
+
+    catch(error){
+
 
         console.error(error);
 
-        pieceList.innerHTML = `
 
-            <div class="piece-card">
+        pieceList.innerHTML =
+        "Unable to load pieces.";
 
-                <h3>Error</h3>
-
-                <p>Unable to load your literary pieces.</p>
-
-            </div>
-
-        `;
 
     }
 
+
 }
-// ===========================================
-// PART 4
-// EDIT PIECE
-// ===========================================
 
-function attachEditEvents() {
 
-    const editButtons = document.querySelectorAll(".edit-btn");
 
-    editButtons.forEach((button) => {
+// ==========================================
+// BUTTON EVENTS
+// ==========================================
 
-        button.addEventListener("click", async () => {
+function attachButtons(){
 
-            const id = button.dataset.id;
 
-            try {
+    document.querySelectorAll(".edit-btn")
+    .forEach(button=>{
 
-                const q = query(
-                    collection(db, "pieces")
-                );
 
-                const snapshot = await getDocs(q);
+        button.addEventListener("click",()=>{
 
-                snapshot.forEach((document) => {
-
-                    if (document.id === id) {
-
-                        const piece = document.data();
-
-                        titleInput.value = piece.title || "";
-
-                        categoryInput.value = piece.category || "";
-
-                        contentInput.value = piece.content || "";
-
-                        editingId = id;
-
-                        publishBtn.textContent = "Update Piece";
-
-                        window.scrollTo({
-
-                            top: 0,
-
-                            behavior: "smooth"
-
-                        });
-
-                    }
-
-                });
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-                alert("Unable to load the selected piece.");
-
-            }
+            editPiece(button.dataset.id);
 
         });
 
+
     });
 
-}
-// ===========================================
-// PART 5
-// DELETE PIECE
-// ===========================================
 
-function attachDeleteEvents() {
 
-    const deleteButtons = document.querySelectorAll(".delete-btn");
+    document.querySelectorAll(".delete-btn")
+    .forEach(button=>{
 
-    deleteButtons.forEach((button) => {
 
-        button.addEventListener("click", async () => {
+        button.addEventListener("click",()=>{
 
-            const id = button.dataset.id;
-
-            const confirmDelete = confirm(
-                "Are you sure you want to permanently delete this literary piece?"
-            );
-
-            if (!confirmDelete) {
-
-                return;
-
-            }
-
-            try {
-
-                await deleteDoc(
-
-                    doc(db, "pieces", id)
-
-                );
-
-                // If the deleted piece was being edited,
-                // reset the editor.
-
-                if (editingId === id) {
-
-                    resetForm();
-
-                }
-
-                alert("Piece deleted successfully.");
-
-                loadPieces();
-
-            }
-
-            catch (error) {
-
-                console.error(error);
-
-                alert("Unable to delete the selected piece.");
-
-            }
+            deletePiece(button.dataset.id);
 
         });
 
+
     });
+
 
 }
 
-// ===========================================
-// END OF FILE
-// ===========================================
+
+
+// ==========================================
+// EDIT
+// ==========================================
+
+async function editPiece(id){
+
+
+    const snap = await getDoc(
+
+        doc(db,"pieces",id)
+
+    );
+
+
+
+    if(snap.exists()){
+
+
+        const piece=snap.data();
+
+
+
+        titleInput.value=piece.title;
+
+        categoryInput.value=piece.category;
+
+        contentInput.value=piece.content;
+
+
+
+        editingId=id;
+
+
+        saveBtn.textContent="Update";
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+    }
+
+
+}
+
+
+
+// ==========================================
+// DELETE
+// ==========================================
+
+async function deletePiece(id){
+
+
+    const confirmDelete =
+    confirm(
+        "Delete this piece permanently?"
+    );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+
+    await deleteDoc(
+
+        doc(db,"pieces",id)
+
+    );
+
+
+
+    loadPieces();
+
+
+}
+
+
+
+// ==========================================
+// CLEAR FORM
+// ==========================================
+
+function clearForm(){
+
+
+    titleInput.value="";
+
+    categoryInput.value="";
+
+    contentInput.value="";
+
+
+    editingId=null;
+
+
+}
