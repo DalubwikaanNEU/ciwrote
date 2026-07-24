@@ -1,111 +1,215 @@
-// ===========================================
+// ==========================================
 // CIWROTE
-// Piece Viewer
-// ===========================================
+// Single Piece Reader
+// ==========================================
+
 
 import { db } from "./firebase.js";
+
 
 import {
 
     doc,
+
     getDoc
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// ===========================================
-// ELEMENTS
-// ===========================================
 
-const titleElement = document.getElementById("title");
 
-const dateElement = document.getElementById("date");
+// ==========================================
+// ELEMENT
+// ==========================================
 
-const categoryElement = document.getElementById("category");
+const pieceContainer = document.getElementById("piece");
 
-const contentElement = document.getElementById("content");
 
-// ===========================================
-// GET DOCUMENT ID
-// ===========================================
 
-const params = new URLSearchParams(window.location.search);
+// ==========================================
+// GET PIECE ID
+// ==========================================
+
+const params = new URLSearchParams(
+    window.location.search
+);
+
 
 const pieceId = params.get("id");
 
-// ===========================================
+
+
+// ==========================================
 // LOAD PIECE
-// ===========================================
+// ==========================================
 
-async function loadPiece() {
+async function loadPiece(){
 
-    if (!pieceId) {
 
-        titleElement.textContent = "Piece not found";
+    if(!pieceId){
 
-        dateElement.textContent = "";
 
-        categoryElement.textContent = "";
+        showError(
+            "No piece selected."
+        );
 
-        contentElement.textContent = "No literary piece was selected.";
 
         return;
 
+
     }
 
-    try {
 
-        const docRef = doc(db, "pieces", pieceId);
 
-        const snap = await getDoc(docRef);
+    try{
 
-        if (!snap.exists()) {
 
-            titleElement.textContent = "Piece not found";
+        const pieceRef = doc(
 
-            dateElement.textContent = "";
+            db,
 
-            categoryElement.textContent = "";
+            "pieces",
 
-            contentElement.textContent =
-                "This literary piece does not exist or may have been deleted.";
+            pieceId
+
+        );
+
+
+
+        const snapshot = await getDoc(pieceRef);
+
+
+
+        if(!snapshot.exists()){
+
+
+            showError(
+                "This piece does not exist."
+            );
+
 
             return;
 
+
         }
 
-        const piece = snap.data();
 
-        document.title = `${piece.title} | ciwrote`;
 
-        titleElement.textContent = piece.title || "Untitled";
+        const piece = snapshot.data();
 
-        dateElement.textContent = piece.date || "";
 
-        categoryElement.textContent = piece.category || "";
 
-        contentElement.textContent = piece.content || "";
+        displayPiece(piece);
+
+
 
     }
 
-    catch (error) {
+
+
+    catch(error){
+
 
         console.error(error);
 
-        titleElement.textContent = "Error";
 
-        dateElement.textContent = "";
 
-        categoryElement.textContent = "";
+        showError(
 
-        contentElement.textContent =
-            "Unable to load this literary piece.";
+            "Unable to load this piece."
+
+        );
+
 
     }
 
+
 }
 
-// ===========================================
+
+
+// ==========================================
+// DISPLAY
+// ==========================================
+
+function displayPiece(piece){
+
+
+
+    pieceContainer.innerHTML = `
+
+
+        <p class="date">
+
+            ${piece.date || ""}
+
+        </p>
+
+
+
+        <h1>
+
+            ${piece.title || "Untitled"}
+
+        </h1>
+
+
+
+        <p class="category">
+
+            ${piece.category || ""}
+
+        </p>
+
+
+
+        <div class="full-content">
+
+            ${piece.content || ""}
+
+        </div>
+
+
+    `;
+
+
+}
+
+
+
+// ==========================================
+// ERROR
+// ==========================================
+
+function showError(message){
+
+
+
+    pieceContainer.innerHTML = `
+
+
+        <h1>
+
+            Oops.
+
+        </h1>
+
+
+        <p>
+
+            ${message}
+
+        </p>
+
+
+    `;
+
+
+}
+
+
+
+// ==========================================
 // START
-// ===========================================
+// ==========================================
 
 loadPiece();
