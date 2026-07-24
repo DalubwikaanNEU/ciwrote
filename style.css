@@ -337,3 +337,98 @@ footer small{
     color:var(--accent);
 
 }
+
+/* ==========================================
+   SINGLE PIECE PAGE
+========================================== */
+
+
+.single-piece{
+
+    width:90%;
+
+    max-width:800px;
+
+    margin:60px auto;
+
+}
+
+
+.single-piece article{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    padding:50px;
+
+    border-radius:8px;
+
+}
+
+
+
+.single-piece h1{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:3rem;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.single-piece .date{
+
+    color:var(--muted);
+
+}
+
+
+
+.single-piece .category{
+
+    color:var(--accent);
+
+    margin:20px 0;
+
+    font-style:italic;
+
+}
+
+
+
+.full-content{
+
+    margin-top:40px;
+
+    white-space:pre-line;
+
+    font-size:1.25rem;
+
+    line-height:2;
+
+}
+
+
+
+@media(max-width:600px){
+
+
+    .single-piece article{
+
+        padding:30px 20px;
+
+    }
+
+
+    .single-piece h1{
+
+        font-size:2.3rem;
+
+    }
+
+
+}
