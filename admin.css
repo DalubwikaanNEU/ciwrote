@@ -1,0 +1,341 @@
+/* ==========================================
+   CIWROTE ADMIN
+   Private Writing Desk
+========================================== */
+
+:root{
+
+    --bg:#f7f2ea;
+    --paper:#fcfaf6;
+    --text:#2c2825;
+    --accent:#7d5c42;
+    --border:#d8cbbb;
+    --muted:#7b7068;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+body{
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    font-family:'EB Garamond', serif;
+
+    line-height:1.8;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.topbar{
+
+    text-align:center;
+
+    padding:45px 20px;
+
+    border-bottom:1px solid var(--border);
+
+    background:rgba(252,250,246,.95);
+
+}
+
+.topbar h1{
+
+    font-family:'Special Elite', cursive;
+
+    font-size:2.2rem;
+
+    margin-bottom:10px;
+
+}
+
+.topbar p{
+
+    color:var(--muted);
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    font-size:.85rem;
+
+}
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.container{
+
+    max-width:900px;
+
+    margin:50px auto;
+
+    padding:0 25px;
+
+}
+
+/* ==========================================
+   EDITOR
+========================================== */
+
+.editor{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    padding:35px;
+
+    border-radius:8px;
+
+}
+
+.editor h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2rem;
+
+    margin-bottom:25px;
+
+}
+
+.editor input,
+
+.editor textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    margin-bottom:20px;
+
+    border:1px solid var(--border);
+
+    background:#fffefc;
+
+    color:var(--text);
+
+    font-family:'EB Garamond', serif;
+
+    font-size:1.05rem;
+
+    outline:none;
+
+}
+
+.editor input:focus,
+
+.editor textarea:focus{
+
+    border-color:var(--accent);
+
+}
+
+.editor textarea{
+
+    min-height:320px;
+
+    resize:vertical;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+button{
+
+    padding:14px 28px;
+
+    border:none;
+
+    background:var(--accent);
+
+    color:white;
+
+    font-size:1rem;
+
+    cursor:pointer;
+
+    border-radius:4px;
+
+    transition:.3s;
+
+    font-family:'EB Garamond', serif;
+
+}
+
+button:hover{
+
+    opacity:.9;
+
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.divider{
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:60px 0;
+
+}
+
+/* ==========================================
+   LIBRARY
+========================================== */
+
+.library h2{
+
+    font-family:'Cormorant Garamond', serif;
+
+    font-size:2rem;
+
+    margin-bottom:30px;
+
+}
+
+#pieceList{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/* ==========================================
+   PIECE CARD
+========================================== */
+
+.piece-card{
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    border-radius:6px;
+
+    padding:25px;
+
+}
+
+.piece-card h3{
+
+    font-size:1.5rem;
+
+    margin-bottom:8px;
+
+    font-family:'Cormorant Garamond', serif;
+
+}
+
+.piece-card p{
+
+    color:var(--muted);
+
+    margin-bottom:18px;
+
+}
+
+/* ==========================================
+   ACTIONS
+========================================== */
+
+.actions{
+
+    display:flex;
+
+    gap:12px;
+
+}
+
+.edit-btn{
+
+    background:#7d5c42;
+
+}
+
+.delete-btn{
+
+    background:#8d3f3f;
+
+}
+
+/* ==========================================
+   SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--accent);
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:var(--bg);
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .topbar h1{
+
+        font-size:1.8rem;
+
+    }
+
+    .editor{
+
+        padding:25px;
+
+    }
+
+    .editor textarea{
+
+        min-height:240px;
+
+    }
+
+    .actions{
+
+        flex-direction:column;
+
+    }
+
+    .actions button{
+
+        width:100%;
+
+    }
+
+}
