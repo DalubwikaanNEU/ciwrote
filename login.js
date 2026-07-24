@@ -1,7 +1,7 @@
-// ===========================================
-// CIWROTE LOGIN
-// Firebase Authentication
-// ===========================================
+// ==========================================
+// CIWROTE
+// Login Authentication
+// ==========================================
 
 import { auth } from "./firebase.js";
 
@@ -12,9 +12,12 @@ import {
 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-// ===========================================
+
+// ==========================================
 // ELEMENTS
-// ===========================================
+// ==========================================
+
+const loginForm = document.getElementById("loginForm");
 
 const emailInput = document.getElementById("email");
 
@@ -24,9 +27,10 @@ const loginBtn = document.getElementById("loginBtn");
 
 const message = document.getElementById("message");
 
-// ===========================================
-// AUTO LOGIN CHECK
-// ===========================================
+
+// ==========================================
+// CHECK IF ALREADY LOGGED IN
+// ==========================================
 
 onAuthStateChanged(auth, (user) => {
 
@@ -38,35 +42,30 @@ onAuthStateChanged(auth, (user) => {
 
 });
 
-// ===========================================
+
+// ==========================================
 // LOGIN
-// ===========================================
+// ==========================================
 
-loginBtn.addEventListener("click", login);
+loginForm.addEventListener("submit", async (event) => {
 
-passwordInput.addEventListener("keydown", (event) => {
+    event.preventDefault();
 
-    if (event.key === "Enter") {
-
-        login();
-
-    }
-
-});
-
-async function login() {
 
     const email = emailInput.value.trim();
 
     const password = passwordInput.value;
 
+
     if (!email || !password) {
 
-        message.textContent = "Please enter your email and password.";
+        message.textContent =
+            "Please enter your email and password.";
 
         return;
 
     }
+
 
     loginBtn.disabled = true;
 
@@ -74,65 +73,80 @@ async function login() {
 
     message.textContent = "";
 
+
     try {
+
 
         await signInWithEmailAndPassword(
 
             auth,
+
             email,
+
             password
 
         );
 
+
         window.location.href = "admin.html";
+
 
     }
 
-    catch (error) {
+
+    catch(error){
+
 
         console.error(error);
 
-        switch (error.code) {
 
-            case "auth/invalid-credential":
+        switch(error.code){
 
-                message.textContent = "Invalid email or password.";
-                break;
-
-            case "auth/user-not-found":
-
-                message.textContent = "Account not found.";
-                break;
-
-            case "auth/wrong-password":
-
-                message.textContent = "Incorrect password.";
-                break;
 
             case "auth/invalid-email":
 
-                message.textContent = "Invalid email address.";
+                message.textContent =
+                    "Invalid email address.";
+
                 break;
+
+
+            case "auth/invalid-credential":
+
+                message.textContent =
+                    "Incorrect email or password.";
+
+                break;
+
 
             case "auth/too-many-requests":
 
-                message.textContent = "Too many attempts. Try again later.";
+                message.textContent =
+                    "Too many attempts. Try again later.";
+
                 break;
+
 
             default:
 
-                message.textContent = "Unable to sign in.";
+                message.textContent =
+                    "Login failed. Please try again.";
 
         }
 
+
     }
 
-    finally {
+
+    finally{
+
 
         loginBtn.disabled = false;
 
         loginBtn.textContent = "Sign In";
 
+
     }
 
-}
+
+});
