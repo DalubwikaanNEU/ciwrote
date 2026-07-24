@@ -1,0 +1,229 @@
+/* ==========================================
+   CIWROTE LOGIN
+   Vintage Theme
+========================================== */
+
+:root{
+
+    --bg:#f7f2ea;
+    --paper:#fcfaf6;
+    --text:#2c2825;
+    --accent:#7d5c42;
+    --border:#d8cbbb;
+    --muted:#7b7068;
+
+}
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:var(--bg);
+
+    font-family:'EB Garamond', serif;
+
+    color:var(--text);
+
+}
+
+/* ==========================================
+   CONTAINER
+========================================== */
+
+.login-container{
+
+    width:100%;
+
+    padding:25px;
+
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.login-card{
+
+    max-width:430px;
+
+    margin:auto;
+
+    background:var(--paper);
+
+    border:1px solid var(--border);
+
+    border-radius:8px;
+
+    padding:45px;
+
+    text-align:center;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.06);
+
+}
+
+/* ==========================================
+   TITLE
+========================================== */
+
+.login-card h1{
+
+    font-family:'Special Elite', cursive;
+
+    font-size:2.4rem;
+
+    margin-bottom:10px;
+
+}
+
+.subtitle{
+
+    font-family:'Cormorant Garamond', serif;
+
+    color:var(--accent);
+
+    font-size:1.2rem;
+
+    margin-bottom:10px;
+
+}
+
+.description{
+
+    color:var(--muted);
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+
+}
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+.login-card input{
+
+    width:100%;
+
+    padding:15px 18px;
+
+    margin-bottom:18px;
+
+    border:1px solid var(--border);
+
+    border-radius:5px;
+
+    background:#fffefc;
+
+    color:var(--text);
+
+    font-size:1rem;
+
+    font-family:'EB Garamond', serif;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.login-card input:focus{
+
+    border-color:var(--accent);
+
+    box-shadow:0 0 0 3px rgba(125,92,66,.12);
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+#loginBtn{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:5px;
+
+    background:var(--accent);
+
+    color:white;
+
+    font-size:1rem;
+
+    font-family:'EB Garamond', serif;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#loginBtn:hover{
+
+    opacity:.9;
+
+}
+
+#loginBtn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+#message{
+
+    margin-top:18px;
+
+    min-height:24px;
+
+    color:#a33d3d;
+
+    font-size:.95rem;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:600px){
+
+    .login-card{
+
+        padding:30px 25px;
+
+    }
+
+    .login-card h1{
+
+        font-size:2rem;
+
+    }
+
+}
