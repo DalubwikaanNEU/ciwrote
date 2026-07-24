@@ -5,35 +5,28 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        ciwrote Admin
-    </title>
+    <title>ciwrote | Writing Desk</title>
 
-    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500;600&family=Special+Elite&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500&family=Special+Elite&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="admin.css">
+    <link rel="stylesheet" href="admin.css">
 
 </head>
 
+
 <body>
 
-    <!-- Header -->
 
-    <header class="topbar">
+<header class="admin-header">
+
+
+    <div>
 
         <h1>
 
@@ -43,74 +36,146 @@
 
         <p>
 
-            Private Writing Desk
+            Writing Desk
 
         </p>
 
-    </header>
+    </div>
 
-    <!-- Main -->
 
-    <main class="container">
+    <button id="logoutBtn">
 
-        <!-- Editor -->
+        Logout
 
-        <section class="editor">
+    </button>
 
-            <h2>
 
-                New Literary Piece
+</header>
 
-            </h2>
 
-            <input
-                type="text"
-                id="title"
-                placeholder="Title">
 
-            <input
-                type="text"
-                id="category"
-                placeholder="Category (Poem, Letter, Essay...)">
+<main class="admin-container">
 
-            <textarea
-                id="content"
-                placeholder="Write something worth remembering..."></textarea>
 
-            <button id="publishBtn">
 
-                Publish
+<section class="editor">
 
-            </button>
 
-        </section>
 
-        <!-- Divider -->
+    <h2>
 
-        <div class="divider"></div>
+        Write a Piece
 
-        <!-- Published Pieces -->
+    </h2>
 
-        <section class="library">
 
-            <h2>
 
-                Published Pieces
+    <input
 
-            </h2>
+        type="text"
 
-            <div id="pieceList">
+        id="title"
 
-                Loading...
+        placeholder="Title of your piece"
 
-            </div>
+    >
 
-        </section>
 
-    </main>
 
-    <script type="module"
-            src="admin.js"></script>
+    <select id="category">
+
+
+        <option value="Poem">
+
+            Poem
+
+        </option>
+
+
+        <option value="Letter">
+
+            Letter
+
+        </option>
+
+
+        <option value="Essay">
+
+            Essay
+
+        </option>
+
+
+        <option value="Thought">
+
+            Thought
+
+        </option>
+
+
+    </select>
+
+
+
+
+    <textarea
+
+        id="content"
+
+        placeholder="Write your piece here..."
+
+    ></textarea>
+
+
+
+
+    <button id="saveBtn">
+
+        Publish
+
+    </button>
+
+
+
+    <p id="status"></p>
+
+
+
+</section>
+
+
+
+
+
+<section class="library">
+
+
+    <h2>
+
+        My Pieces
+
+    </h2>
+
+
+    <div id="pieceList">
+
+
+        Loading...
+
+    </div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+
+<script type="module" src="admin.js"></script>
+
 
 </body>
 
