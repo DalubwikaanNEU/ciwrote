@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        ciwrote Admin
+    </title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=EB+Garamond:wght@400;500&family=Special+Elite&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="admin.css">
+
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="topbar">
+
+        <h1>
+
+            ciwrote
+
+        </h1>
+
+        <p>
+
+            Private Writing Desk
+
+        </p>
+
+    </header>
+
+    <!-- Main -->
+
+    <main class="container">
+
+        <!-- Editor -->
+
+        <section class="editor">
+
+            <h2>
+
+                New Literary Piece
+
+            </h2>
+
+            <input
+                type="text"
+                id="title"
+                placeholder="Title">
+
+            <input
+                type="text"
+                id="category"
+                placeholder="Category (Poem, Letter, Essay...)">
+
+            <textarea
+                id="content"
+                placeholder="Write something worth remembering..."></textarea>
+
+            <button id="publishBtn">
+
+                Publish
+
+            </button>
+
+        </section>
+
+        <!-- Divider -->
+
+        <div class="divider"></div>
+
+        <!-- Published Pieces -->
+
+        <section class="library">
+
+            <h2>
+
+                Published Pieces
+
+            </h2>
+
+            <div id="pieceList">
+
+                Loading...
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script type="module"
+            src="admin.js"></script>
+
+</body>
+
+</html>
